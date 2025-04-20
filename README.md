@@ -82,11 +82,13 @@ stop the PPM decoding and free resources. The PPM stream must be reinitialized w
 **newFrame()**  
 returns a *long unsigned int*  time stamp (in us) of the last received frame (value of micros() )and reset the value to 0.  
 Return 0 if the application already queries newFrame() for the same frame.  
-This function can be used to synchronize the application if need be.
+This function can be used to synchronize the application if need be.  
+
 
 ## Fine tunning
 
 Usual RC PPM signal timing is with a start pulse (300us) and an overall frame length of 20ms (frequency 50hz)  
 By default the library uses this “standard” and it should satisfy most users. 
 But fine tuning is available and the user can change some specific vales through public variables of the class
-
+<img src="./image/waveform.JPG"   width="400">  
+![](./image/waveform.JPG)   
