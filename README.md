@@ -89,6 +89,10 @@ This function can be used to synchronize the application if need be.
 
 Usual RC PPM signal timing is with a start pulse (300us) and an overall frame length of 20ms (frequency 50hz)  
 By default the library uses this “standard” and it should satisfy most users. 
-But fine tuning is available and the user can change some specific vales through public variables of the class
-<img src="./image/waveform.JPG"   width="400">  
-![](./image/waveform.JPG)   
+But fine tuning is available and the user can change some specific vales through public variables of the class  
+
+<img src="./image/waveform.JPG" title="Typical PPM frame" width="500">  
+  <figcaption>Typical PPM frame</figcaption>
+</figure>
+
+
