@@ -1,8 +1,8 @@
 
 ## ESP32_ppm
-*ESP32_ppm* is a library that provides decoding and coding of PPM signals widely used in RC transmitters and receivers equipments.  
+**_ESP32_ppm_** is a library that provides **decoding and coding of PPM signals** widely used in RC transmitters and receivers equipments.  
 The library uses the **RMT (Remote Control Transceiver) peripheral** of the ESP32 and all output or input waveforms are managed by the hardware, requesting only a small load to the CPU.  
-Specifically designed for the ESP32 family it has been tested on ESP32, ESP32C3, ESP32S3 and should run on all the processor of the family. (ESP32 Arduino core 3.2.0)   
+Specifically designed for the ESP32 family it has been tested on ESP32, ESP32C3, ESP32S3 and should run on all the processors of the family. (ESP32 Arduino core 3.2.0)   
 Depending on the ESP32 model, up to 8 PPM streams can be managed on the same processor.  
  ESP32: 8 streams (RX or TX); ESP32C3: 2 RX, 2 TX; ESP32S3: 4 RX, 4 TX.  
  The library can handle PPM frames with up to 16 channels but usual RC PPM signals use less channels. A high number of channels may require some specific timing tuning. ([see Fine tunning chapiter](#tuning))  
@@ -107,4 +107,12 @@ This value may be increased on a frame by frame basis if the encoding of the cha
 This ensure that the decoder will always have enough time to detect the end of a frame. 
 
 These values **MUST** be changed before the initilization of the stream object (so before begin (…) )  
+```
+  ppmWriter myPPM_TX;
+...
+  myPPM_TX.TX_pulse_width = 200;
+  myPPM_TX.TX_minimum_space = 4500;
+  myPPM_TX.TX_minimum_frame = 15000;
+...
+```
 
