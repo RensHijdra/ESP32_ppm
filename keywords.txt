@@ -1,0 +1,20 @@
+#######################################
+# Syntax Coloring Map For ESP32_ppm
+#######################################
+# https://arduino.github.io/arduino-cli/1.2/library-specification/
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+ppmWriter	KEYWORD1
+ppmReader	KEYWORD1
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+begin	KEYWORD2
+end	KEYWORD2
+start	KEYWORD2
+startTest	KEYWORD2
+stop	KEYWORD2
+sentFrame	KEYWORD2
+newFrame	KEYWORD2
+
