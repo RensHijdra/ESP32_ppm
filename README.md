@@ -1,6 +1,3 @@
-##  TBD 16 / 8 / 4 channels default values  
-encoding / decoding
-
 
 ## ESP32_ppm
 *ESP32_ppm* is a library that provides decoding and coding of PPM signals widely used in RC transmitters and receivers equipments.  
@@ -69,7 +66,7 @@ int* ppmArrayRX;
 ppmArray = monPPM_RX.begin(19); // receiving frame on pin 19
 monPPM_RX.start();
 …
-for (int I =1; i< ppmArray[0];i++) Serial.printf(“%d  “, ppmArray[i]);
+for (int i =1; i< ppmArray[0];i++) Serial.printf(“%d  “, ppmArray[i]);
 …
 ```
 Update of this array is done asynchronously in respect of the main user task and will always reflect the last received values.   
