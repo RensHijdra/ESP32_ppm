@@ -88,15 +88,12 @@ This function can be used to synchronize the application if need be.
 
 Usual RC PPM signal timing is with a start pulse (300us) and an overall frame length arround 20ms (frequency 50hz). Channel values are between 1000us and 2000us.  
 By default the library uses this “standard” and it should satisfy most users.   
-Nevertheless fine tuning is available and the user can change some specific values through public variables of the class  
+Nevertheless fine tuning is available and the user can change some specific values through public variables of the class. No checks are done in the library and bad values can give unpredictable results and even crashes.  
 
 <img src="./image/waveform.JPG" title="Typical PPM frame" width="500">  
 
 All values are in microseconds (us).  
-## For receiver:  
-**RX_minimum_space**  
-for the decoder, a level longer than this value will be interpreted as the end of a frame (**default 3500us**).
-## For encoder:
+## For encoder: 
 **TX_pulse_width**   
 length of the positive or negative pulse used for channel end/start (**default 300us**).  
 **TX_minimum_space**  
@@ -105,7 +102,13 @@ minimum space between 2 frames. (**default 4000**).
 minimum frame length. Define the frequency of the frame (**default 22500us**).
 This value may be increased on a frame by frame basis if the encoding of the channels values plus the **TX_minimum_space** does not fit in the alloted **TX_minimum_frame**.  
 This ensure that the decoder will always have enough time to detect the end of a frame. 
-
+## For receiver:  
+**RX_minimum_space**  
+for the decoder, a level longer than this value will be interpreted as the end of a frame (**default 3200us**).  
+***Warning***: For ESP32, ESP32S2, the **maximum value is 6553us**.   
+For ESP32C3, ESP32S3, ESP32C6, ESP32P4 and ESP32H2, the **maximum value is 3276us**.  
+No checks are done in the library and bad values can give unpredictable results and even crashes.  
+   
 These values **MUST** be changed before the initilization of the stream object (so before begin (…) )  
 ```
   ppmWriter myPPM_TX;
