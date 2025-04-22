@@ -6,7 +6,12 @@
 #include "freertos/queue.h"
 #include "driver/rmt_rx.h"
 #include "driver/rmt_tx.h"
-
+//Warning: the driver makes some checks (linked to hardware limitation) on the values passed in the rmt_receive_config_t.
+//    uint32_t filter_reg_value = ((uint64_t)rx_chan->filter_clock_resolution_hz * config->signal_range_min_ns) / 1000000000UL;
+//    uint32_t idle_reg_value = ((uint64_t)channel->resolution_hz * config->signal_range_max_ns) / 1 000 000 000UL;
+//The 2 values must be lower than 65535 for ESP32,S2 and 32767 for S3, C3, C6 and H2 (RMT_LL_MAX_IDLE_VALUE )
+//With a 10Mhz clock resolution, maximum value for signal_range_max_ns (ie RX_MINIMUM_SPACE) is 6553 for EESP32, and S2
+//and 3276 for ESP32C3,S3,C6,H2
 #define PPM_RESOLUTION_HZ 10000000 // 10MHz resolution, 1 tick = 100ns   0.1us
 //#define TICK_PER_US  10
 #define TICK_PER_US  (PPM_RESOLUTION_HZ/1000000)
@@ -20,10 +25,8 @@
 #define TX_MINIMUM_SPACE 4000 //TX_MINIMUM_SPACE (end of frame) us. Minimum idle space
 #define TX_PULSE_WIDTH  300 //TX_PULSE_WIDTH   start pulse (RISING or FALLING) for a channel us
 
-#define RX_MINIMUM_SPACE 3500 // if a level is longer than this, it is the end-of-frame marker. us
-
-//#define PPM_FRAME_LENGTH (22500*TICK_PER_US)
-
+#define RX_MINIMUM_SPACE 3200 // if a level is longer than this, it is the end-of-frame marker. us
+//3200 will be OK for all ESPs
 
 static const char *TAG = "ppmESP32";
 typedef struct {
