@@ -97,7 +97,7 @@ Returns NULL if an error occurs.
 This structure is populated at the end of the analysis.  
 ```
 typedef struct {
-  unsigned int polarity; // polarity of the PPM signal : RISING or FOLLING
+  unsigned int polarity; // polarity of the PPM signal : RISING or FALLING
   unsigned int minLow;   // minimum duration in us of the low pulses
   unsigned int maxLow;   // maximum duration in us of the low pulses
   unsigned int minHigh;  // minimum duration in us of the high pulses
@@ -110,9 +110,14 @@ typedef struct {
 ```
 **start(nbrMillis)**  
 start the PPM analysis during nbrMillis milliseconds. Default is 1000ms.   
-The analysis in run in background and  asynchronously of the user task and the user **must** use **doneSpy()** in order to detect the end of the anlysis.  See example.   
-**stop()**  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx    
+The analysis in run in background and  asynchronously of the user task and the user **must** use **doneSpy()** in order to detect the end of the anlysis.  See example.  
+1000ms is usually more than enough to perform the analysis.   
+Longer time may be requested if the user want to exercise the sticks of it RC equipment and retreive the min/max values reached by the PPM pulses.  
+For a "normal" RC ppm signal, the minChan/manChan should be identical, as well as the minLow/maxLow in case of a FALLING signal or minHigh/maxHigh in case of a RISING signal.
+Small discrepencies may come from the accuracy of the spy ...   
+**stop()**   
 stop the PPM analysis. It can be resumed with **start()**.  
+This function should not be used in usual case: the analysis will stop anyway after nbrMillis given in the start() function.   
 **end()**  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx   
 stop the PPM analysis and free resources. The PPM analyzer must be reinitialized with a **begin(….)** before use.   
 **doneSpy()**  
@@ -121,11 +126,10 @@ Return 0 if the application already queries **doneSpy()** after the end of the a
 The user MUST call this function and wait on a "true" return in order to detect the end of the analysis and retrieve the characteristics of the 
 PPM stream.  
 ```
- Result_ppmSpy_t* result_spy;
+ xxx
+xxxx
+xxx
 
- if (myPPM_Spy.doneSpy()) {
-    Serial.printf("polarity:%s  maxFrame:%d, minFrame:%d\n ", (ppmResultSpy->polarity == RISING ? "RISING" : "FALLING"),
-                  ppmResultSpy->maxFrame, ppmResultSpy->minFrame);
 }
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
