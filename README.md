@@ -34,10 +34,10 @@ The new value is immediately used for the next ppm frame.
 No checks are made upon the values of the ppm channels. (usual values are between 1000 and 2000 us …)  
 **start()**   
 start the PPM generation.    
-**startTest()**	  
+**startTest(incr)**	  
 start the PPM generation for test purpose: 
 * in each PPM frame, the value of each channel is the same.  
-* This value is incremented for each frame, changing from 1000us to 1999us and so on.
+* This value is incremented by the value incr (default is 1) for each frame, changing from 1000us to 1999us and so on.
 
 **stop()**  
   stop the PPM generation. It can be resumed with **start()** or **starTest()**  
@@ -80,7 +80,7 @@ stop the PPM decoding and free resources. The PPM stream must be reinitialized w
 **newFrame()**  
 returns a *long unsigned int*  time stamp (in us) of the last received frame (value of micros() ) and reset the value to 0.  
 Return 0 if the application already queries **newFrame()** for the same frame.  
-This function can be used to synchronize the application if need be.  
+This function can be used to synchronize the application if need be.  See example.
 
 
 ### Analyzing PPM Encoded Signals
