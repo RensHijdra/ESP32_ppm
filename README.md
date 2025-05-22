@@ -84,7 +84,7 @@ This function can be used to synchronize the application if need be.  See exampl
 
 
 ### Analyzing PPM Encoded Signals   
-***Warning:*** this functionality is not available on ESP32. Use ESP32C3 ... or other.   
+***Warning:*** this functionality is ***not available on ESP32***. Use ESP32C3 ... or other.   
     
 **ppmSpy ()**   
 Create a PPM object for analyzing an incoming stream of ppm frames.  
