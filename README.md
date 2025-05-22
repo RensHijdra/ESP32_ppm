@@ -124,15 +124,7 @@ stop the PPM analysis and free resources. The PPM analyzer must be reinitialized
 Returns a *long unsigned int*  time stamp (in us) of the end of the test (value of micros() ) and reset the value to 0.  
 Return 0 if the application already queries **doneSpy()** after the end of the analysis.
 The user MUST call this function and wait on a "true" return in order to detect the end of the analysis and retrieve the characteristics of the 
-PPM stream.  
-```
- xxx
-xxxx
-xxx
-
-}
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-```
+PPM stream. See example.
 
 <a name="tuning"> 
  
