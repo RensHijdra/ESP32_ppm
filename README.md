@@ -83,9 +83,12 @@ Return 0 if the application already queries **newFrame()** for the same frame.
 This function can be used to synchronize the application if need be.  See example.
 
 
-### Analyzing PPM Encoded Signals
+### Analyzing PPM Encoded Signals   
+***Warning:*** this functionality is not available on ESP32. Use ESP32C3 ... or other.   
+    
 **ppmSpy ()**   
 Create a PPM object for analyzing an incoming stream of ppm frames.  
+**Warning:** this functionality is not available on ESP32. Use ESP32C3 ... or other.
 
 `ppmSpy monPPM_SPY; // create a PPM stream analyzer`
 
@@ -118,7 +121,7 @@ Small discrepencies may come from the accuracy of the spy ...
 **stop()**   
 stop the PPM analysis. It can be resumed with **start()**.  
 This function should not be used in usual case: the analysis will stop anyway after nbrMillis given in the start() function.   
-**end()**  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx   
+**end()**    
 stop the PPM analysis and free resources. The PPM analyzer must be reinitialized with a **begin(….)** before use.   
 **doneSpy()**  
 Returns a *long unsigned int*  time stamp (in us) of the end of the test (value of micros() ) and reset the value to 0.  
