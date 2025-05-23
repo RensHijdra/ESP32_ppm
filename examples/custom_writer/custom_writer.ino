@@ -1,5 +1,5 @@
 /*
- * This example create a simple 4 channels PPM streams and demonstarte how
+ * This example create a simple 4 channels PPM streams and demonstrate how
  * the timing of the frame may be changed by the user if need be.
  * ( A small USB logic analyzer is handy for the control of PPM stream.)
  */
