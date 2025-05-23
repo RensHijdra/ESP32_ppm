@@ -7,7 +7,7 @@
 #######################################
 ppmWriter	KEYWORD1
 ppmReader	KEYWORD1
-ppmSpy  KEYWORD1
+ppmSpy	KEYWORD1
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
@@ -18,5 +18,5 @@ startTest	KEYWORD2
 stop	KEYWORD2
 sentFrame	KEYWORD2
 newFrame	KEYWORD2
-doneSpy  KEYWORD2
+doneSpy	KEYWORD2
 
