@@ -3,6 +3,7 @@
 #include "freertos/queue.h"
 #include "driver/rmt_rx.h"
 #include "ESP32_ppm.h"
+static bool  example_rmt_rx_done_callback(rmt_channel_handle_t rx_channel, const rmt_rx_done_event_data_t *edata, void *user_ctx);
 
 ppmReader:: ppmReader( ) {
 }
@@ -69,9 +70,6 @@ int* ppmReader::begin(uint8_t rxPin)
 // Call back. Must be static to be registered and communicate with the object
 static bool IRAM_ATTR example_rmt_rx_done_callback(rmt_channel_handle_t channel, const rmt_rx_done_event_data_t *edata, void *user_data)
 {
-  int static expectedCh;
-  int static cnt = 0;
-  int static nbrReceived = 0;
   RX_private_area_t *pt_RX_private = (RX_private_area_t *) user_data;
   // the last symbols contains only the end pulse of the last channel. We receive 1 symbol more than the nbr of channels
   pt_RX_private->RX_Channels_values[0] = min (static_cast<unsigned int>(MAX_PPM_CHANNELS_RX), edata->num_symbols - 1);

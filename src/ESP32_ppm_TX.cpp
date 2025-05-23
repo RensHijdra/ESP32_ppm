@@ -3,7 +3,10 @@
 #include "freertos/queue.h"
 #include "driver/rmt_tx.h"
 #include "ESP32_ppm.h"
-
+static bool ppmEventCallBack(rmt_channel_handle_t tx_chan, const rmt_tx_done_event_data_t*edata, void *user_ctx );
+static size_t ppm_encode(const void *data, size_t data_size, size_t symbols_written,
+                         size_t symbols_free, rmt_symbol_word_t *symbols, bool *done, void *arg);
+                         
 ppmWriter:: ppmWriter(int polarity) {
   _polarity = polarity;
 }

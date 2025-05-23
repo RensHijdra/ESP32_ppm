@@ -35,7 +35,6 @@
 #define SPY_MINIMUM_SPACE 16383ul   // In us. OK on C3 at 2Mhz (not a lot ....) and ESP32
 #define SPY_MIN_IDLE 2500  // in us. idle length used by SPY to detect potential end of frame
 
-static const char *TAG = "ppmESP32";
 typedef struct {
   int RX_Channels_values[MAX_PPM_CHANNELS_RX + 1];  // [0]: nbr of received channels; [1]: channel1, [2]: channels 2 in us
   // we always reserve the max for RX_Channels_values ... even if not used
@@ -47,6 +46,9 @@ typedef struct {
     // the following timing requirement is based on PPM protocol
     .signal_range_min_ns = 2000,     //  shortest pulses will be ignored
     .signal_range_max_ns = 1234567, // Initialized after. the longest duration for PPM signal. After: end frame marker
+    .flags = {
+      .en_partial_rx = false, 
+    },
   };
 } RX_private_area_t;
 typedef struct {
@@ -116,17 +118,8 @@ class ppmWriter {
   private:
     TX_private_area_t *_TX_private;
     int _polarity;
-    //   bool ppmEventCallBack(rmt_channel_handle_t tx_chan, const rmt_tx_done_event_data_t*edata, void *user_ctx );
-    //   static size_t ppm_encode(const void *data, size_t data_size, size_t symbols_written,
-    //                           size_t symbols_free, rmt_symbol_word_t *symbols, bool *done, void *arg);
-    //    size_t ppm_encode(const void *data, size_t data_size, size_t symbols_written,
-    //                      size_t symbols_free, rmt_symbol_word_t *symbols, bool *done, void *arg);
 };
-//static size_t ppm_encode(const void *data, size_t data_size, size_t symbols_written,
-//                        size_t symbols_free, rmt_symbol_word_t *symbols, bool *done, void *arg);
-static bool ppmEventCallBack(rmt_channel_handle_t tx_chan, const rmt_tx_done_event_data_t*edata, void *user_ctx );
-static size_t ppm_encode(const void *data, size_t data_size, size_t symbols_written,
-                         size_t symbols_free, rmt_symbol_word_t *symbols, bool *done, void *arg);
+
 class ppmReader {
   public:
     ppmReader ();
@@ -152,9 +145,4 @@ class ppmSpy {
   private:
     Spy_private_area_t  *_Spy_private;
 };
-//bool rmt_rx_done_callback_t example_rmt_rx_done_callback(rmt_channel_handle_t rx_channel, const rmt_rx_done_event_data_t *edata, void *user_ctx);
-
-static bool  example_rmt_rx_done_callback(rmt_channel_handle_t rx_channel, const rmt_rx_done_event_data_t *edata, void *user_ctx);
-static bool  check_rmt_rx_done_callback(rmt_channel_handle_t rx_channel, const rmt_rx_done_event_data_t *edata, void *user_ctx);
-
 #endif

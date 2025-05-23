@@ -1,8 +1,9 @@
-//#include "freertos/FreeRTOS.h"
-//#include "freertos/task.h"
-//#include "freertos/queue.h"
-//#include "driver/rmt_rx.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "freertos/queue.h"
+#include "driver/rmt_rx.h"
 #include "ESP32_ppm.h"
+static bool  check_rmt_rx_done_callback(rmt_channel_handle_t rx_channel, const rmt_rx_done_event_data_t *edata, void *user_ctx);
 
 #if !SOC_RMT_SUPPORT_RX_PINGPONG
 #pragma message "Warning: ppmSpy functionality of the ESP32_ppm library not supported with this SoC"
