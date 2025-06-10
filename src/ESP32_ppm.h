@@ -1,6 +1,5 @@
 #ifndef ESP32_ppm
 #define ESP32_ppm
-#include <Arduino.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/queue.h"
@@ -103,32 +102,27 @@ typedef struct {
   bool testMode = false;
 } TX_private_area_t;
 
-class ppmWriter {
-  public:
-    ppmWriter(int polarity = RISING); // RISING , FALLING
-    int *begin(uint8_t txPin, uint8_t nbr_TX_Channels = DEFAULT_NBR_CHANNELS_TX);
-    void end();
-    void start(void);
-    void startTest(int incr = 1 );
-    void stop(void);
-    unsigned long sentFrame();
-    int TX_minimum_frame = TX_MINIMUM_FRAME;   //TX_MINIMUM_FRAME 20000.0 (50hz)
-    int TX_minimum_space = TX_MINIMUM_SPACE;   //TX_MINIMUM_SPACE (end of frame)
-    int TX_pulse_width = TX_PULSE_WIDTH  ;  //TX_PULSE_WIDTH   start pulse (RISING or FALLING for a channel)
-  private:
-    TX_private_area_t *_TX_private;
-    int _polarity;
-};
+
+    // ppmWriter(int polarity = RISING); // RISING , FALLING
+    int *ppm_tx_begin(uint8_t txPin, uint8_t nbr_TX_Channels = DEFAULT_NBR_CHANNELS_TX);
+    void ppm_tx_end();
+    void ppm_tx_start(void);
+    void ppm_tx_startTest(int incr = 1 );
+    void ppm_tx_stop(void);
+    unsigned long ppm_writer_sentFrame(void);
+    extern int TX_minimum_frame;   //TX_MINIMUM_FRAME 20000.0 (50hz)
+    extern int TX_minimum_space;   //TX_MINIMUM_SPACE (end of frame)
+    extern int TX_pulse_width;  //TX_PULSE_WIDTH   start pulse (RISING or FALLING for a channel)
 
 class ppmReader {
   public:
     ppmReader ();
     void end();
     //   int *begin(uint8_t rxPin, uint8_t nbr_RX_Channels = DEFAULT_NBR_CHANNELS_RX);
-    int *begin(uint8_t rxPin);
-    void start(void);
-    void stop(void);
-    unsigned long newFrame();
+    int *ppm_rx_begin(uint8_t rxPin);
+    void ppm_rx_start(void);
+    void ppm_rx_stop(void);
+    unsigned long ppm_rx_newFrame();
     int RX_minimum_space = RX_MINIMUM_SPACE;
   private:
     RX_private_area_t  *_RX_private;
